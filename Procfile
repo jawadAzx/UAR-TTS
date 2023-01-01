@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath TTS TTS.wsgi --log-file -

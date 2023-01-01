@@ -18,7 +18,6 @@ def synthesize(request):
         with open(outPath, 'rb') as f:
             response = HttpResponse(f.read(), content_type='audio/wav')
             response['Content-Disposition'] = 'attachment; filename="test.wav"'
-            # delete the file after sending it
             os.remove(outPath)
             return response
     else:
