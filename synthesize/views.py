@@ -6,7 +6,7 @@ import json
 @csrf_exempt
 # Create your views here.
 def synthesize(request):
-    if request.method == 'GET':
+    if request.method == 'POST':
         modelFolder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'synthesize', 'model')
         configPath = os.path.join(modelFolder_path, 'config.json')
         modelPath = os.path.join(modelFolder_path, 'checkpoint_430000.pth')
