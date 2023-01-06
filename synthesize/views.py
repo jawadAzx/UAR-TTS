@@ -17,8 +17,8 @@ def synthesize(request):
         command = "tts --text " + text + " --config_path " + configPath + " --model_path " + modelPath + " --out_path " + outPath
         venvActivate = "source /home/ubuntu/project/env/bin/activate"
         try:
-            # use subprocess to run the command without shell=True
-            subprocess.run(venvActivate + " && " + command, shell=True, check=True)
+            # make a subprocess call to the command and activate the virtual environment first to be used on ec2 instance
+            subprocess.call(venvActivate + " && " + command, shell=True, executable='/bin/bash')
             with open(outPath, 'rb') as f:
                 response = HttpResponse(f.read(), content_type='audio/wav')
                 response['Content-Disposition'] = 'attachment; filename="test.wav"'
