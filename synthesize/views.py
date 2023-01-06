@@ -15,8 +15,10 @@ def synthesize(request):
         data = json.loads(data)
         text = data['text']
         command = "tts --text " + text + " --config_path " + configPath + " --model_path " + modelPath + " --out_path " + outPath
+        venvActivate = "source /home/ubuntu/project/env/bin/activate"
         try:
-            subprocess.call(command, shell=True)
+            # use subprocess to run the command without shell=True
+            subprocess.run(venvActivate + " && " + command, shell=True, check=True)
             with open(outPath, 'rb') as f:
                 response = HttpResponse(f.read(), content_type='audio/wav')
                 response['Content-Disposition'] = 'attachment; filename="test.wav"'
